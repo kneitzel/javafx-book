@@ -60,3 +60,112 @@ Daher sollte auf diesen Weg verzichtet werden. Statt dessen sollte JavaFX wie je
 
 Dieses Vorgehen wird im weiteren Verlauf des Buches erläutert.
 
+\subsection{Maven und Gradle}
+
+Java Projekte sollten möglichst unabhängig von einer speziellen Entwicklungsumgebung verwaltet werden, damit Entwickler immer zu der von Ihnen bevorzugten Entwicklungsumgebung greifen können. Im Java Umfeld haben sich die Build-Tools Maven und Gradle durchgesetzt und diese werden von den ENtwicklungsumgebungen mit den größten Marktanteilen unterstützt.
+
+So kann dann ein Entwickler mit IntelliJ IDEA, Eclipse oder Netbeans arbeiten. Bei Bedarf kann auch ganz auf eine Entwicklungsumgebung verzichtet werden und das Projekt auf der Kommandozeile übersetzt werden.
+
+Auch die Einrichtung eines Buildservers ist deutlich vereinfacht zumal diese Buildtools automatisch notwendige Abhängigkeiten herunter laden.
+
+\subsubsection{Maven}
+
+Die Entwicklung von Maven geht auf zurück auf das Jahr 2003 und wurde seit dem aktiv weiter entwickelt. Die Verwaltung des Projektes erfolgt über eine pom.xml (pom = project object model). Die Dateien des Projektes befinden sich in der Regel in standard Verzeichnissen:
+
+In src liegen die Sourcen und alles, was erzeugt wird, findet sich in target. Die Sourcen unterteilen sich dann in main (Sourcen für die eigentliche Applikation) und test (Sourcen für die automatischen Tests). Darin wiederum wird unterteilt in z.B. java für Java Sourcen und resources für weitere Dateien, die für die Übersetzung oder während der Laufzeit benötigt werden, z.B. Bilder und Konfigurationsdateien.
+
+Abhängigkeiten werden auf Repositories bereit gestellt und bei Bedarf von dort bezogen. Die Daten aus den entfernten Repositories werden in einem lokalen Verzeichnis für alle Projekte abgelegt - dem sogenannten local Repository.
+
+Für ein Java Projekt könnte eine einfache pom.xml so aussehen:
+\subsection{Code-Beispiele}
+Code wird im Buch immer wie folgt dargestellt:
+
+\textbf{Beispiele/1.2 Notwendige Infrastruktur/Maven Project/pom.xml}
+\begin{lstlisting}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <groupId>de.kneitzel</groupId>
+  <artifactId>hellofx</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>hellofx</name>
+  <url>http://blog.kneitzel.de</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>    
+	<maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <organisation>K. Neitzel Blog</organisation>
+    <javafx.version>11.0.2</javafx.version>
+    <linkImageName>hellofx</linkImageName>
+    <launcherName>hellofx</launcherName>
+    <mainClass>HelloWorld.main/helloworld.HelloWorld</mainClass>
+  </properties>
+
+    <organization>
+        <name>${organisation}</name>
+    </organization>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.3</version>
+        <configuration>
+          <release>11</release>
+          <jlinkImageName>${linkImageName}</jlinkImageName>
+          <launcher>${launcherName}</launcher>
+          <mainClass>${mainClass}</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+\end{lstlisting}
+
+Für Anfänger ist es einfach, die pom.xml 1:1 zu übernehmen und nur ein paar minimale Änderungen vorzunehmen. Su muss nur der Bereich am Anfang editiert werden:
+\begin{lstlisting}
+  <groupId>de.kneitzel</groupId>
+  <artifactId>hellofx</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>hellofx</name>
+  <url>http://blog.kneitzel.de</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>    
+	<maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <organisation>K. Neitzel Blog</organisation>
+    <javafx.version>11.0.2</javafx.version>
+    <linkImageName>hellofx</linkImageName>
+    <launcherName>hellofx</launcherName>
+    <mainClass>HelloWorld.main/helloworld.HelloWorld</mainClass>
+  </properties>
+\end{lstlisting}
+Der ganze Rest kann erst einmal unverändert bleiben (bzw. die üblichen Anpassungen an den Dependencies sind natürlich notwendig, so hier noch mehr benötigt wird).
+
+\subsubsection{Gradle}
+
