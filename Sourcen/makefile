@@ -1,5 +1,7 @@
 SOURCEN = $(WILDCARD *.tex)
 
+all: JavaFX.pdf
+
 JavaFX.pdf : $(SOURCEN)
 	pdflatex JavaFX
 #	bibtex JavaFX
@@ -7,6 +9,6 @@ JavaFX.pdf : $(SOURCEN)
 	pdflatex JavaFX
  
 clean :  
-	rm *.aux *.log *.pdf
+	rm -f *.aux *.log *.pdf
 
 
