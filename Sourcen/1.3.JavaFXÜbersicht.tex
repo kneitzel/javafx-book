@@ -1,0 +1,89 @@
+\section{JavaFX Übersicht}
+Dieses Kapitel gibt eine Übersicht über diverse Bestandteile von JavaFX.
+
+\subsection{Aufbau Applikation}
+
+\subsubsection{Application Class}
+In JavaFX Applikation wird in der Regel eine Klasse erstellt, die von Application erbt.
+
+In der main Methode wird dabei nur launch der Application Klasse aufgerufen. Dies initialisiert
+die eigentliche Applikation und startet den JavaFX Application Thread, der für die Event
+Abarbeitung verantwortlich ist.
+
+Die Application Klasse hat drei wichtige Methoden, die überschrieben werden können.
+\paragraph{init}
+Die init Methode wird als erstes aufgerufen und kan für spezielle Initialisierungen
+verwendet werden, ehe das Hauptfenster erstellt wird.
+
+\paragraph{start}
+Die Start Methode ist abstrakt und muss überschrieben werden. Diese Methode ist der
+Haupteinstiegspunkt und bekommt den Hauptbereich übergeben, den man mit seinem Inhalt
+füllen kann. Dies ist in der Regel das Hauptfenster der Applikation, aber je nach
+verwendeter Plattform kann dies auch ein Bereich z.B. im Browser sein oder die Hauptanzeige
+einer mobilen Applikation.
+
+\paragraph{stop}
+Die Stop Methode wird aufgerufen, wenn die Anwendung beendet wird, z.B. über einen
+Platform.exit(int) Aufruf.
+
+\begin{tabular}[h]{|p{2cm}|p{9cm}|}
+\hline
+\textbf{Wichtig} & Wenn die Applikation über System.exit(int) beendet wird, wird diese
+Methode nicht aufgerufen! \\
+\hline
+\end{tabular}
+
+\paragraph{Beispiel für eine Application Klasse}
+ 
+\begin{lstlisting}
+package helloworld;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class HelloWorld extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        StackPane root = new StackPane();
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
+    }
+}
+\end{lstlisting}
+
+\subsubsection{FXML Loader}
+Der FXML Loader lädt eine fxml Datei und generiert die Elemente, die darin beschrieben sind.
+
+
+\subsection{Container}
+Übersicht über die diversen Container von JavaFX.
+
+\subsubsection{AnchorPane}
+
+\subsubsection{BorderPane}
+
+\subsubsection{Arcordion / TitledPane}
+
+\subsubsection{ButtonBar / ToolBar / HBox / VBox}
+
+\subsubsection{GridPane}
+
+\subsubsection{FlowPane / TilePane}
+
+\subsubsection{TabPane / Tab}
+
+\subsubsection{SplitPane}
+
+\subsubsection{ScrollPane}
+
+\subsubsection{SplitPane}
+
+\subsubsection{StackPane}
+
