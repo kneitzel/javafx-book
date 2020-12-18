@@ -43,7 +43,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class HelloWorld extends Application {
+public class HelloWorldApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -58,14 +58,33 @@ public class HelloWorld extends Application {
 }
 \end{lstlisting}
 
-\subsubsection{FXML Loader}
-Der FXML Loader lädt eine fxml Datei und generiert die Elemente, die darin beschrieben sind.
+An diesem Beispuel erkennen wir die wichtigen Punkte:
+\begin{itemize}
 
+\item Die Klasse \bf{HelloWorldApp} erbt von Application.
+
+\item Die Methode \bf{main} ruft launch auf und übergibt dabei die Parameter.
+
+\item Die Methode \bf{start} wird überschrieben und in der Methode wird beim Hauptfenster (primaryStage) werden Titel
+und Inhalt gesetzt und das Fenster sichtbar gemacht.
+\end{itemize}
+
+\subsubsection{FXML Loader}
+Der FXML Loader lädt eine fxml Datei und generiert Instanzen für die Elemente, die darin beschrieben sind.
+
+Dabei wird ggf. auch eine Instanz des controllers erzeugt und in dieser Klasse im Nachganz Instanzvariablen befüllt,
+die mit @FXML\footnote{@FXML ist eine Java Annotation, welche auf Felder und Methoden angewendet werden kann. Die so
+markierten Felder werden dann vom FXMLLoader berücksichtigt bei der Initialisierung.} markiert oder public\footnote{Felder
+sollten nie public sein sondern immer private oder maximal protected. Wenn ein zugriff von außen benötigt wird, dann 
+sollten dazu Getter und/oder Setter verwendet werden.} sind.
 
 \subsection{Container}
-Übersicht über die diversen Container von JavaFX.
+Im Folgenden findet sich eine Übersicht über die diversen Container von JavaFX. Dies dient nur der groben Orientierung
+und kann ein Experimentieren nicht ersetzen. Ich kann nur empfehlen, mit allen Containern etwas 'zu spielen' um so ein
+erstes Verständnis zu dem Control zu bekommen.
 
 \subsubsection{AnchorPane}
+
 
 \subsubsection{BorderPane}
 
